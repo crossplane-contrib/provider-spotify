@@ -25,7 +25,42 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal spotify credentials as JSON"
+
+	// provider config variables
+	keyAPIKey     = "api_key"
+	keyAuthServer = "auth_server"
+	keyTokenID    = "token_id"
+	keyUsername   = "username"
 )
+
+type spotifyConfig struct {
+	APIKey     *string `json:"api_key,omitempty"`
+	AuthServer *string `json:"auth_server,omitempty"`
+	TokenID    *string `json:"token_id,omitempty"`
+	Username   *string `json:"username,omitempty"`
+}
+
+func terraformProviderConfigurationBuilder(creds spotifyConfig) (terraform.ProviderConfiguration, error) {
+	cnf := terraform.ProviderConfiguration{}
+
+	if creds.APIKey != nil {
+		cnf[keyAPIKey] = *creds.APIKey
+	}
+
+	if creds.AuthServer != nil {
+		cnf[keyAuthServer] = *creds.AuthServer
+	}
+
+	if creds.TokenID != nil {
+		cnf[keyTokenID] = *creds.TokenID
+	}
+
+	if creds.Username != nil {
+		cnf[keyUsername] = *creds.Username
+	}
+
+	return cnf, nil
+}
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration
@@ -43,6 +78,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if configRef == nil {
 			return ps, errors.New(errNoProviderConfig)
 		}
+
 		pc := &v1beta1.ProviderConfig{}
 		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
 			return ps, errors.Wrap(err, errGetProviderConfig)
@@ -57,16 +93,18 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
-		creds := map[string]string{}
+
+		creds := spotifyConfig{}
 		if err := json.Unmarshal(data, &creds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
 		// Set credentials in Terraform provider configuration.
-		/*ps.Configuration = map[string]any{
-			"username": creds["username"],
-			"password": creds["password"],
-		}*/
+		ps.Configuration, err = terraformProviderConfigurationBuilder(creds)
+		if err != nil {
+			return ps, errors.Wrap(err, errProviderConfigurationBuilder)
+		}
+
 		return ps, nil
 	}
 }
