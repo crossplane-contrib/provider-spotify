@@ -4,14 +4,14 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: resources.null.template.upbound.io
+  name: resources.null.spotify.upbound.io
 spec:
-  group: null.template.upbound.io
+  group: null.spotify.upbound.io
   names:
     categories:
     - crossplane
     - managed
-    - template
+    - spotify
     kind: Resource
     listKind: ResourceList
     plural: resources
