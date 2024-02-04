@@ -4,7 +4,7 @@
 PROJECT_NAME ?= provider-spotify
 PROJECT_REPO ?= github.com/tampakrap/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION ?= 1.2.1
+export TERRAFORM_VERSION ?= 1.7.2
 
 export TERRAFORM_PROVIDER_SOURCE ?= conradludgate/spotify
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/conradludgate/terraform-provider-spotify
