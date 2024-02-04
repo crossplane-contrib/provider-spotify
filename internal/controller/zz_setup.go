@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	resource "github.com/tampakrap/provider-spotify/internal/controller/null/resource"
+	playlist "github.com/tampakrap/provider-spotify/internal/controller/playlist/playlist"
 	providerconfig "github.com/tampakrap/provider-spotify/internal/controller/providerconfig"
 )
 
@@ -17,7 +17,7 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resource.Setup,
+		playlist.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

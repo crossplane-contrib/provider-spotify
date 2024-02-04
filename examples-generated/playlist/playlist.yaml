@@ -1,0 +1,16 @@
+apiVersion: playlist.noidea.io/v1alpha1
+kind: Playlist
+metadata:
+  annotations:
+    meta.upbound.io/example-id: playlist/v1alpha1/playlist
+  labels:
+    testing.upbound.io/example-name: playlist
+  name: playlist
+spec:
+  forProvider:
+    description: My playlist is so awesome
+    public: false
+    tracks:
+    - ${data.spotify_track.overkill.id}
+    - ${data.spotify_track.blackwater.id}
+    - ${data.spotify_track.snowblind.id}

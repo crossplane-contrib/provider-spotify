@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: resources.null.spotify.upbound.io
+  name: playlists.playlist.noidea.io
 spec:
-  group: null.spotify.upbound.io
+  group: playlist.noidea.io
   names:
     categories:
     - crossplane
     - managed
     - spotify
-    kind: Resource
-    listKind: ResourceList
-    plural: resources
-    singular: resource
+    kind: Playlist
+    listKind: PlaylistList
+    plural: playlists
+    singular: playlist
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,10 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API. The null_resource
-          resource implements the standard resource lifecycle but takes no further
-          action. The triggers argument allows specifying an arbitrary set of values
-          that, when changed, will cause the resource to be replaced.
+        description: Playlist is the Schema for the Playlists API. Resource to manage
+          a spotify playlist.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -52,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceSpec defines the desired state of Resource
+            description: PlaylistSpec defines the desired state of Playlist
             properties:
               deletionPolicy:
                 default: Delete
@@ -69,13 +67,17 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  triggers:
-                    additionalProperties:
+                  description:
+                    description: The description of the resulting playlist
+                    type: string
+                  public:
+                    description: Whether the playlist can be accessed publically
+                    type: boolean
+                  tracks:
+                    description: A set of tracks for the playlist to contain
+                    items:
                       type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                    type: array
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -89,13 +91,17 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
-                  triggers:
-                    additionalProperties:
+                  description:
+                    description: The description of the resulting playlist
+                    type: string
+                  public:
+                    description: Whether the playlist can be accessed publically
+                    type: boolean
+                  tracks:
+                    description: A set of tracks for the playlist to contain
+                    items:
                       type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -257,20 +263,31 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.tracks is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tracks)
+                || (has(self.initProvider) && has(self.initProvider.tracks))'
           status:
-            description: ResourceStatus defines the observed state of Resource.
+            description: PlaylistStatus defines the observed state of Playlist.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: The description of the resulting playlist
+                    type: string
                   id:
                     type: string
-                  triggers:
-                    additionalProperties:
+                  public:
+                    description: Whether the playlist can be accessed publically
+                    type: boolean
+                  snapshotId:
+                    type: string
+                  tracks:
+                    description: A set of tracks for the playlist to contain
+                    items:
                       type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

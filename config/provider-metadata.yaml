@@ -1,36 +1,58 @@
-name: hashicorp/null
+name: conradludgate/spotify
 resources:
-    null_resource:
+    spotify_library:
         subCategory: ""
-        description: The null_resource resource implements the standard resource lifecycle but takes no further action. The triggers argument allows specifying an arbitrary set of values that, when changed, will cause the resource to be replaced.
-        name: null_resource
-        title: null_resource Resource - terraform-provider-null
+        name: spotify_library
+        title: spotify_library Resource - terraform-provider-spotify
         examples:
-            - name: cluster
+            - name: my_library
               manifest: |-
                 {
-                  "connection": [
-                    {
-                      "host": "${element(aws_instance.cluster.*.public_ip, 0)}"
-                    }
-                  ],
-                  "provisioner": {
-                    "remote-exec": [
-                      {
-                        "inline": [
-                          "bootstrap-cluster.sh ${join(\" \", aws_instance.cluster.*.private_ip)}"
-                        ]
-                      }
-                    ]
-                  },
-                  "triggers": {
-                    "cluster_instance_ids": "${join(\",\", aws_instance.cluster.*.id)}"
-                  }
+                  "tracks": [
+                    "${data.spotify_track.overkill.id}",
+                    "${data.spotify_track.blackwater.id}",
+                    "${data.spotify_track.snowblind.id}"
+                  ]
                 }
-              dependencies:
-                aws_instance.cluster: |-
-                    {
-                      "count": 3
-                    }
         argumentDocs: {}
         importStatements: []
+    spotify_library_albums:
+        subCategory: ""
+        name: spotify_library_albums
+        title: spotify_library_albums Resource - terraform-provider-spotify
+        examples:
+            - name: my_album
+              manifest: |-
+                {
+                  "albums": [
+                    "${data.spotify_album.only_in_dreams.id}",
+                    "${data.spotify_album.the_promised_land.id}"
+                  ]
+                }
+        argumentDocs: {}
+        importStatements: []
+    spotify_playlist:
+        subCategory: ""
+        description: Resource to manage a spotify playlist.
+        name: spotify_playlist
+        title: spotify_playlist Resource - terraform-provider-spotify
+        examples:
+            - name: playlist
+              manifest: |-
+                {
+                  "description": "My playlist is so awesome",
+                  "name": "My playlist",
+                  "public": false,
+                  "tracks": [
+                    "${data.spotify_track.overkill.id}",
+                    "${data.spotify_track.blackwater.id}",
+                    "${data.spotify_track.snowblind.id}"
+                  ]
+                }
+        argumentDocs: {}
+        importStatements:
+            - |-
+              # Using the playlist ID
+              # https://open.spotify.com/playlist/37i9dQZF1DWVs8I62NcHks (a playlist share link)
+              #                                   ^^^^^^^^^^^^^^^^^^^^^^
+              terraform import spotify_playlist.example 37i9dQZF1DWVs8I62NcHks
