@@ -1,0 +1,12 @@
+apiVersion: playlist.noidea.io/v1alpha1
+kind: Playlist
+metadata:
+  name: crossplaneplaylist
+spec:
+  forProvider:
+    description: "managed with crossplane"
+    public: true
+    tracks:
+      - "4VWfod1Vw2b8VVruLKrUzx"
+  providerConfigRef:
+    name: default
