@@ -20,11 +20,13 @@ import (
 
 const (
 	// error messages
-	errNoProviderConfig     = "no providerConfigRef provided"
-	errGetProviderConfig    = "cannot get referenced ProviderConfig"
-	errTrackUsage           = "cannot track ProviderConfig usage"
-	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal spotify credentials as JSON"
+	errNoProviderConfig               = "no providerConfigRef provided"
+	errGetProviderConfig              = "cannot get referenced ProviderConfig"
+	errTrackUsage                     = "cannot track ProviderConfig usage"
+	errExtractCredentials             = "cannot extract credentials"
+	errUnmarshalCredentials           = "cannot unmarshal spotify credentials as JSON"
+	errProviderConfigurationBuilder   = "cannot build configuration for terraform provider block"
+	errTerraformProviderMissingAPIKey = "spotify provider needs api_key to be set"
 
 	// provider config variables
 	keyAPIKey     = "api_key"
@@ -45,6 +47,8 @@ func terraformProviderConfigurationBuilder(creds spotifyConfig) (terraform.Provi
 
 	if creds.APIKey != nil {
 		cnf[keyAPIKey] = *creds.APIKey
+	} else {
+		return cnf, errors.Error(errTerraformProviderMissingAPIKey)
 	}
 
 	if creds.AuthServer != nil {
