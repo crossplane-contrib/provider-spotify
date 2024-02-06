@@ -48,7 +48,7 @@ func terraformProviderConfigurationBuilder(creds spotifyConfig) (terraform.Provi
 	if creds.APIKey != nil {
 		cnf[keyAPIKey] = *creds.APIKey
 	} else {
-		return cnf, errors.Error(errTerraformProviderMissingAPIKey)
+		return cnf, errors.Errorf(errTerraformProviderMissingAPIKey)
 	}
 
 	if creds.AuthServer != nil {
