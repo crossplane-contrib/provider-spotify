@@ -70,6 +70,9 @@ spec:
                   description:
                     description: The description of the resulting playlist
                     type: string
+                  name:
+                    description: The name of the resulting playlist
+                    type: string
                   public:
                     description: Whether the playlist can be accessed publically
                     type: boolean
@@ -93,6 +96,9 @@ spec:
                 properties:
                   description:
                     description: The description of the resulting playlist
+                    type: string
+                  name:
+                    description: The name of the resulting playlist
                     type: string
                   public:
                     description: Whether the playlist can be accessed publically
@@ -264,6 +270,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.tracks is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.tracks)
@@ -277,6 +287,9 @@ spec:
                     description: The description of the resulting playlist
                     type: string
                   id:
+                    type: string
+                  name:
+                    description: The name of the resulting playlist
                     type: string
                   public:
                     description: Whether the playlist can be accessed publically

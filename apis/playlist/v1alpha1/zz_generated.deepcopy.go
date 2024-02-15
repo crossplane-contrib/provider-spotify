@@ -47,6 +47,11 @@ func (in *PlaylistInitParameters) DeepCopyInto(out *PlaylistInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Public != nil {
 		in, out := &in.Public, &out.Public
 		*out = new(bool)
@@ -120,6 +125,11 @@ func (in *PlaylistObservation) DeepCopyInto(out *PlaylistObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Public != nil {
 		in, out := &in.Public, &out.Public
 		*out = new(bool)
@@ -158,6 +168,11 @@ func (in *PlaylistParameters) DeepCopyInto(out *PlaylistParameters) {
 	*out = *in
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}

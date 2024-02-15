@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     description: My playlist is so awesome
+    name: My playlist
     public: false
     tracks:
     - ${data.spotify_track.overkill.id}

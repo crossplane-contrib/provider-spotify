@@ -22,6 +22,9 @@ type PlaylistInitParameters struct {
 	// The description of the resulting playlist
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name of the resulting playlist
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Whether the playlist can be accessed publically
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
 
@@ -35,6 +38,9 @@ type PlaylistObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resulting playlist
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether the playlist can be accessed publically
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
@@ -50,6 +56,10 @@ type PlaylistParameters struct {
 	// The description of the resulting playlist
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the resulting playlist
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether the playlist can be accessed publically
 	// +kubebuilder:validation:Optional
@@ -95,6 +105,7 @@ type PlaylistStatus struct {
 type Playlist struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tracks) || (has(self.initProvider) && has(self.initProvider.tracks))",message="spec.forProvider.tracks is a required parameter"
 	Spec   PlaylistSpec   `json:"spec"`
 	Status PlaylistStatus `json:"status,omitempty"`
