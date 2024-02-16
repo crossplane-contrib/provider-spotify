@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "spotify.noidea.io"
+	Group   = "spotify.crossplane.io"
 	Version = "v1beta1"
 )
 

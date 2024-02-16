@@ -1,10 +1,11 @@
-apiVersion: playlist.noidea.io/v1alpha1
+apiVersion: playlist.crossplane.io/v1beta1
 kind: Playlist
 metadata:
   name: crossplaneplaylist
 spec:
   forProvider:
-    description: "managed with crossplane"
+    name: "A crossplane created playlist"
+    description: "created and managed by crossplane-provider-spotify"
     public: true
     tracks:
       - "4VWfod1Vw2b8VVruLKrUzx"

@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: storeconfigs.spotify.noidea.io
+  name: storeconfigs.spotify.crossplane.io
 spec:
-  group: spotify.noidea.io
+  group: spotify.crossplane.io
   names:
     categories:
     - crossplane
