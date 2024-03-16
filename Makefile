@@ -15,7 +15,7 @@ export TERRAFORM_NATIVE_PROVIDER_BINARY ?= ${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_$
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
-PLATFORMS ?= linux_amd64
+PLATFORMS ?= linux_amd64 linux_arm64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
