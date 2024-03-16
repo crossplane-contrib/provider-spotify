@@ -6,6 +6,6 @@ spec:
   credentials:
     source: Secret
     secretRef:
-      name: example-creds
+      name: provider-spotify-example-creds
       namespace: crossplane-system
       key: credentials
