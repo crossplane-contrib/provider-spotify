@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: playlists.playlist.crossplane.io
+  name: playlists.playlist.spotify.crossplane.io
 spec:
-  group: playlist.crossplane.io
+  group: playlist.spotify.crossplane.io
   names:
     categories:
     - crossplane

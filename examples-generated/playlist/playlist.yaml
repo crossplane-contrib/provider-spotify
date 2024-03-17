@@ -1,4 +1,4 @@
-apiVersion: playlist.crossplane.io/v1alpha1
+apiVersion: playlist.spotify.crossplane.io/v1alpha1
 kind: Playlist
 metadata:
   annotations:
