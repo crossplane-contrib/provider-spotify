@@ -18,6 +18,7 @@ env:
   # step 'if env.XXX != ""', so we copy these to succinctly test whether
   # credentials have been provided before trying to run steps that need them.
   UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
+  XPKG_ACCESS_ID: ${{ secrets.XPKG_ACCESS_ID }}
 
 jobs:
   detect-noop:
@@ -312,8 +313,8 @@ jobs:
           path: _output/**
 
       - name: Login to Upbound via up login
-        if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
-        run: make up.login TOKEN=${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+        if: env.XPKG_ACCESS_ID != ''
+        run: make up.login TOKEN=${{ secrets.XPKG_TOKEN }}
 
       - name: Publish Artifacts
         run: make publish BRANCH_NAME=${GITHUB_REF##*/}
