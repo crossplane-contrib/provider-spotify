@@ -1,4 +1,12 @@
-# Provider Spotify
+# Provider Spotify <!-- omit in toc -->
+
+<div align="center">
+
+![CI](https://github.com/tampakrap/provider-spotify/workflows/CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/tampakrap/provider-spotify/all.svg?style=flat-square)](https://github.com/tampakrap/provider-spotify/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tampakrap/provider-spotify)](https://goreportcard.com/report/github.com/tampakrap/provider-spotify)
+
+</div>
 
 `provider-spotify` is a [Crossplane](https://crossplane.io/) provider that
 is built using [Upjet](https://github.com/crossplane/upjet) code
@@ -7,20 +15,29 @@ Spotify API. It currently only supports managing Spotify playlists.
 
 This crossplane provider is generated from [conradludgate/terraform-provider-spotify](https://github.com/conradludgate/terraform-provider-spotify).
 
-## Installation
+# Table of contents
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Configuration](#configuration)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Developing](#developing)
+- [Report a Bug](#report-a-bug)
+
+## Getting Started
 
 ### Requirements
 
 You need to create a Spotify developer app and run Spotify's authorization
-proxy server `spotify-auth-proxy`. In oder to set them up, take a look at the
-following documents:
-- https://developer.hashicorp.com/terraform/tutorials/community-providers/spotify-playlist
-- https://github.com/conradludgate/terraform-provider-spotify/tree/main/spotify_auth_proxy
-
-It is recommended to install the `spotify-auth-proxy` in the same Kubernetes
-cluster as the `provider-spotify` via [this Helm
+proxy server `spotify-auth-proxy`. It is recommended to install the
+`spotify-auth-proxy` in the same Kubernetes cluster as the `provider-spotify`
+via [this Helm
 chart](https://github.com/tampakrap/helm-charts/tree/main/charts/spotify-auth-proxy).
 Check its README and the comments in the values.yaml to set it up.
+
+Additional documentation:
+- https://developer.hashicorp.com/terraform/tutorials/community-providers/spotify-playlist
+- https://github.com/conradludgate/terraform-provider-spotify/tree/main/spotify_auth_proxy
 
 ### Configuration
 
@@ -30,57 +47,55 @@ that contains the API Key and the URL of the `spotify-auth-proxy` Kubernetes
 Service.
 
 - If you have not set a custom API Key in the Helm chart (default):
-
-```
-export SPOTIFY_API_KEY=$(kubectl -n spotify-auth-proxy logs spotify-auth-proxy-0 | grep APIKey | cut -d':' -f2 | xargs)
-```
+  ```bash
+  export SPOTIFY_API_KEY=$(kubectl -n spotify-auth-proxy logs spotify-auth-proxy-0 | grep APIKey | cut -d':' -f2 | xargs)
+  ```
 
 - If you have set a custom API Key in the Helm chart:
-
-```
-export SPOTIFY_API_KEY=$(kubectl -n spotify-auth-proxy exec spotify-auth-proxy-0 -- env | grep API_KEY | cut -d'=' -f2)
-```
+  ```bash
+  export SPOTIFY_API_KEY=$(kubectl -n spotify-auth-proxy exec spotify-auth-proxy-0 -- env | grep API_KEY | cut -d'=' -f2)
+  ```
 
 Next, create the Kubernetes Secret with the API Key and the URL of the
 `spotify-auth-proxy` Kubernetes Service:
 
-```
+```bash
 sed -e "s/YOUR_API_KEY/$SPOTIFY_API_KEY/" examples/providerconfig/secret.yaml.tmpl > examples/providerconfig/secret.yaml
 ```
 
-### ProviderConfig and Provider installation
+### Installation
 
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://marketplace.upbound.io/providers/tampakrap/provider-spotify)
 using either of the following methods (replace `$LATEST_VERSION` accordingly):
 
 - Using [up](https://docs.upbound.io/reference/cli/):
-```
-up ctp provider install tampakrap/provider-spotify:v$LATEST_VERSION
-```
+  ```bash
+  up ctp provider install tampakrap/provider-spotify:v$LATEST_VERSION
+  ```
 
 - Using [crossplane](https://docs.crossplane.io/latest/cli/):
-```
-crossplane xpkg install provider tampakrap/provider-spotify:v$LATEST_VERSION
-```
+  ```bash
+  crossplane xpkg install provider tampakrap/provider-spotify:v$LATEST_VERSION
+  ```
 
 - Using declarative installation:
-```
-cat <<EOF | kubectl apply -f -
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-spotify
-spec:
-  package: tampakrap/provider-spotify:v$LATEST_VERSION
-EOF
-```
+  ```bash
+  cat <<EOF | kubectl apply -f -
+  apiVersion: pkg.crossplane.io/v1
+  kind: Provider
+  metadata:
+    name: provider-spotify
+  spec:
+    package: tampakrap/provider-spotify:v$LATEST_VERSION
+  EOF
+  ```
 
 You can see the API reference [here](https://doc.crds.dev/github.com/tampakrap/provider-spotify).
 
 Finally, you can install the Secret and the ProviderConfig:
 
-```
+```bash
 kubectl apply -f examples/providerconfig/
 ```
 
