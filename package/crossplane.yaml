@@ -2,3 +2,13 @@ apiVersion: meta.pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-spotify
+annotations:
+  meta.crossplane.io/maintainer: "Theo Chatzimichos <tampakrap@gmail.com>"
+  meta.crossplane.io/source: https://github.com/tampakrap/provider-spotify
+  meta.crossplane.io/license: Apache-2.0
+  meta.crossplane.io/description: A Crossplane provider for managing Spotify playlists in Kubernetes.
+  meta.crossplane.io/readme: |
+    `provider-spotify` is a Crossplane provider for managing Spotify playlists in Kubernetes.
+
+    It is based on the Terraform Spotify provider. Read the [README](https://github.com/tampakrap/provider-spotify/blob/main/README.md)
+    for instructions.
