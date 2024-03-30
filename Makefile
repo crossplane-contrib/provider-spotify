@@ -161,7 +161,7 @@ run: go.build
 
 # Login to the Upbound Marketplace via up login
 up.login:
-	@$(UP) login -t $(TOKEN)
+	@$(UP) login -q -t $(TOKEN)
 
 # ====================================================================================
 # End to End Testing
