@@ -67,28 +67,21 @@ sed -e "s/YOUR_API_KEY/$SPOTIFY_API_KEY/" examples/providerconfig/secret.yaml.tm
 
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://marketplace.upbound.io/providers/tampakrap/provider-spotify)
-using either of the following methods (replace `$LATEST_VERSION` accordingly):
+using either of the following methods:
 
 - Using [up](https://docs.upbound.io/reference/cli/):
   ```bash
-  up ctp provider install tampakrap/provider-spotify:v$LATEST_VERSION
+  up ctp provider install tampakrap/provider-spotify:v0.1.0
   ```
 
 - Using [crossplane](https://docs.crossplane.io/latest/cli/):
   ```bash
-  crossplane xpkg install provider tampakrap/provider-spotify:v$LATEST_VERSION
+  crossplane xpkg install provider tampakrap/provider-spotify:v0.1.0
   ```
 
 - Using declarative installation:
   ```bash
-  cat <<EOF | kubectl apply -f -
-  apiVersion: pkg.crossplane.io/v1
-  kind: Provider
-  metadata:
-    name: provider-spotify
-  spec:
-    package: tampakrap/provider-spotify:v$LATEST_VERSION
-  EOF
+  kubectl apply -f examples/install.yaml
   ```
 
 You can see the API reference [here](https://doc.crds.dev/github.com/tampakrap/provider-spotify).
