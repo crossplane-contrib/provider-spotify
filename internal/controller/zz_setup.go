@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	playlist "github.com/tampakrap/provider-spotify/internal/controller/playlist/playlist"
-	providerconfig "github.com/tampakrap/provider-spotify/internal/controller/providerconfig"
+	playlist "github.com/crossplane-contrib/provider-spotify/internal/controller/playlist/playlist"
+	providerconfig "github.com/crossplane-contrib/provider-spotify/internal/controller/providerconfig"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to

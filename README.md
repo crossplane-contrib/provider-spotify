@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![CI](https://github.com/tampakrap/provider-spotify/workflows/CI/badge.svg)
-[![GitHub release](https://img.shields.io/github/release/tampakrap/provider-spotify/all.svg?style=flat-square)](https://github.com/tampakrap/provider-spotify/releases)
-[![Go Report Card](https://goreportcard.com/badge/github.com/tampakrap/provider-spotify)](https://goreportcard.com/report/github.com/tampakrap/provider-spotify)
+![CI](https://github.com/crossplane-contrib/provider-spotify/workflows/CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/crossplane-contrib/provider-spotify/all.svg?style=flat-square)](https://github.com/crossplane-contrib/provider-spotify/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/crossplane-contrib/provider-spotify)](https://goreportcard.com/report/github.com/crossplane-contrib/provider-spotify)
 
 </div>
 
@@ -66,17 +66,17 @@ sed -e "s/YOUR_API_KEY/$SPOTIFY_API_KEY/" examples/providerconfig/secret.yaml.tm
 ### Installation
 
 Install the provider by using the following command after changing the image tag
-to the [latest release](https://marketplace.upbound.io/providers/tampakrap/provider-spotify)
+to the [latest release](https://marketplace.upbound.io/providers/crossplane-contrib/provider-spotify)
 using either of the following methods:
 
 - Using [up](https://docs.upbound.io/reference/cli/):
   ```bash
-  up ctp provider install tampakrap/provider-spotify:v0.1.0
+  up ctp provider install crossplane-contrib/provider-spotify:v0.1.0
   ```
 
 - Using [crossplane](https://docs.crossplane.io/latest/cli/):
   ```bash
-  crossplane xpkg install provider tampakrap/provider-spotify:v0.1.0
+  crossplane xpkg install provider crossplane-contrib/provider-spotify:v0.1.0
   ```
 
 - Using declarative installation:
@@ -84,7 +84,7 @@ using either of the following methods:
   kubectl apply -f examples/install.yaml
   ```
 
-You can see the API reference [here](https://doc.crds.dev/github.com/tampakrap/provider-spotify).
+You can see the API reference [here](https://doc.crds.dev/github.com/crossplane-contrib/provider-spotify).
 
 Finally, you can install the Secret and the ProviderConfig:
 
@@ -95,8 +95,8 @@ kubectl apply -f examples/providerconfig/
 You should get outputs similar to the following:
 ```
 ➜ kubeclt get providers
-NAME               INSTALLED   HEALTHY   PACKAGE                             AGE
-provider-spotify   True        True      tampakrap/provider-spotify:v0.1.0   12m
+NAME               INSTALLED   HEALTHY   PACKAGE                                      AGE
+provider-spotify   True        True      crossplane-contrib/provider-spotify:v0.1.0   12m
 ➜ kubectl get spotify
 NAME                                           AGE
 providerconfig.spotify.crossplane.io/default   4m9s
@@ -151,4 +151,4 @@ make build
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/tampakrap/provider-spotify/issues).
+open an [issue](https://github.com/crossplane-contrib/provider-spotify/issues).
