@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-spotify
 spec:
-  package: crossplane-contrib/provider-spotify:v0.1.0
+  package: crossplane-contrib/provider-spotify:v0.2.0
