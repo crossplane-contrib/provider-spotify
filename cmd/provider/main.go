@@ -26,12 +26,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/tampakrap/provider-spotify/apis"
-	"github.com/tampakrap/provider-spotify/apis/v1alpha1"
-	"github.com/tampakrap/provider-spotify/config"
-	"github.com/tampakrap/provider-spotify/internal/clients"
-	"github.com/tampakrap/provider-spotify/internal/controller"
-	"github.com/tampakrap/provider-spotify/internal/features"
+	"github.com/crossplane-contrib/provider-spotify/apis"
+	"github.com/crossplane-contrib/provider-spotify/apis/v1alpha1"
+	"github.com/crossplane-contrib/provider-spotify/config"
+	"github.com/crossplane-contrib/provider-spotify/internal/clients"
+	"github.com/crossplane-contrib/provider-spotify/internal/controller"
+	"github.com/crossplane-contrib/provider-spotify/internal/features"
 )
 
 func main() {

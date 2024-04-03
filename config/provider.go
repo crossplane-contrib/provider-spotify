@@ -10,12 +10,12 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 
-	"github.com/tampakrap/provider-spotify/config/playlist"
+	"github.com/crossplane-contrib/provider-spotify/config/playlist"
 )
 
 const (
 	resourcePrefix = "spotify"
-	modulePath     = "github.com/tampakrap/provider-spotify"
+	modulePath     = "github.com/crossplane-contrib/provider-spotify"
 )
 
 //go:embed schema.json

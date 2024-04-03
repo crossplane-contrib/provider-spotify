@@ -17,7 +17,6 @@ env:
   # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
   # step 'if env.XXX != ""', so we copy these to succinctly test whether
   # credentials have been provided before trying to run steps that need them.
-  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
   XPKG_ACCESS_ID: ${{ secrets.XPKG_ACCESS_ID }}
 
 jobs:
@@ -257,13 +256,13 @@ jobs:
           version: ${{ env.DOCKER_BUILDX_VERSION }}
           install: true
 
-      #- name: Login to Upbound
-      #  uses: docker/login-action@v2
-      #  if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
-      #  with:
-      #    registry: xpkg.upbound.io
-      #    username: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
-      #    password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+      - name: Login to Upbound
+        uses: docker/login-action@v2
+        if: env.XPKG_ACCESS_ID != ''
+        with:
+          registry: xpkg.upbound.io
+          username: ${{ secrets.XPKG_ACCESS_ID }}
+          password: ${{ secrets.XPKG_TOKEN }}
 
       - name: Checkout
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 #v3
@@ -311,10 +310,6 @@ jobs:
         with:
           name: output
           path: _output/**
-
-      - name: Login to Upbound via up login
-        if: env.XPKG_ACCESS_ID != ''
-        run: make up.login TOKEN=${{ secrets.XPKG_TOKEN }}
 
       - name: Publish Artifacts
         run: make publish BRANCH_NAME=${GITHUB_REF##*/}

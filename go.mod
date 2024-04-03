@@ -1,4 +1,4 @@
-module github.com/tampakrap/provider-spotify
+module github.com/crossplane-contrib/provider-spotify
 
 go 1.19
 

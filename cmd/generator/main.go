@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/pipeline"
 
-	"github.com/tampakrap/provider-spotify/config"
+	"github.com/crossplane-contrib/provider-spotify/config"
 )
 
 func main() {

@@ -15,7 +15,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/terraform"
 
-	"github.com/tampakrap/provider-spotify/apis/v1beta1"
+	"github.com/crossplane-contrib/provider-spotify/apis/v1beta1"
 )
 
 const (
