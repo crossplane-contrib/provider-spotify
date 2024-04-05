@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![CI](https://github.com/crossplane-contrib/provider-spotify/workflows/CI/badge.svg)
+![CI](https://github.com/crossplane-contrib/provider-spotify/actions/workflows/ci.yml/badge.svg?branch=main)
 [![GitHub release](https://img.shields.io/github/release/crossplane-contrib/provider-spotify/all.svg?style=flat-square)](https://github.com/crossplane-contrib/provider-spotify/releases)
 [![Go Report Card](https://goreportcard.com/badge/github.com/crossplane-contrib/provider-spotify)](https://goreportcard.com/report/github.com/crossplane-contrib/provider-spotify)
 
