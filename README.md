@@ -123,6 +123,12 @@ NAME                                                                            
 providerconfigusage.spotify.crossplane.io/46502e43-db94-4ba1-85bc-6f7df2352459   4m44s   default       Playlist        crossplane-can-play-music
 ```
 
+📣 🔊 Side note, this is [a real
+playlist](https://open.spotify.com/playlist/3HXwBJSvBPHnWHQZ3z0o3b), which is
+tracked in [this Git
+repository](https://github.com/tampakrap/spotify-playlists-as-code), PRs are
+always welcome!
+
 ## Developing
 
 Run code-generation pipeline:
