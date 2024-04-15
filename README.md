@@ -96,7 +96,7 @@ You should get outputs similar to the following:
 ```
 ➜ kubeclt get providers
 NAME               INSTALLED   HEALTHY   PACKAGE                                      AGE
-provider-spotify   True        True      crossplane-contrib/provider-spotify:v0.1.0   12m
+provider-spotify   True        True      crossplane-contrib/provider-spotify:v0.2.0   12m
 ➜ kubectl get spotify
 NAME                                           AGE
 providerconfig.spotify.crossplane.io/default   4m9s
