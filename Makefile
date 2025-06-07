@@ -54,7 +54,7 @@ GO_SUBDIRS += cmd internal apis
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.15.0
-UP_VERSION = v0.18.0
+UP_VERSION = v0.28.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.5.0
 -include build/makelib/k8s_tools.mk
@@ -147,6 +147,9 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 # its location in CI so that we cache between builds.
 go.cachedir:
 	@go env GOCACHE
+
+go.mod.cachedir:
+	@go env GOMODCACHE
 
 # Generate a coverage report for cobertura applying exclusions on
 # - generated file
