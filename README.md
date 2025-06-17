@@ -71,12 +71,12 @@ using either of the following methods:
 
 - Using [up](https://docs.upbound.io/reference/cli/):
   ```bash
-  up ctp provider install crossplane-contrib/provider-spotify:v0.2.4
+  up ctp provider install crossplane-contrib/provider-spotify:v0.2.5
   ```
 
 - Using [crossplane](https://docs.crossplane.io/latest/cli/):
   ```bash
-  crossplane xpkg install provider crossplane-contrib/provider-spotify:v0.2.4
+  crossplane xpkg install provider crossplane-contrib/provider-spotify:v0.2.5
   ```
 
 - Using declarative installation:
